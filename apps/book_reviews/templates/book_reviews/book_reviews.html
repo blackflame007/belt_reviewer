@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'book_reviews/styles.css' %}" />
+    <title>Add Book and Review</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container">
+          <br>
+          <a href="/books">Home</a>
+          <a href="/logout">Logout</a>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-xs|sm|md|lg|xl-6">               
+                <h4>{{ book.title   }}</h4>
+                <p>Author: {{ book.author.author }}</p>
+
+                <h4>Reviews:</h4>
+                <div id="reviews">
+                {% for review in reviews  %}
+                    <p>{{review.rating }}</p>
+                    <p><a href="/user/{{review.user.id}}">{{review.user.name }}</a> says: {{review.review }}</p>
+                    <p><em>Posted on: {{ review.created_at }}</em></p>
+                {% endfor %}
+                </div>
+            </div>
+           <div class="col-xs|sm|md|lg|xl-6">
+               <h4>Add a Review:</h4>
+ 
+               <form action="/add_review/{{book.id}}" method="post">{% csrf_token %}
+                <textarea name="review" cols="30" rows="4"></textarea>
+                <p>Rating: 
+                    <select name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></p>
+                <input type="submit" value="Submit Review!"class="btn-success"> 
+            
+                </form>
+               
+           </div>
+        </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

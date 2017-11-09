@@ -1,0 +1,16 @@
+.scroll{
+    overflow: scroll;
+    text-overflow: hidden;
+    width: 70%;
+    height:60%;
+}
+.top_link{
+    margin-left: 80%
+}
+#errMess {
+    color: rgba(255, 0, 0, 0.623);
+}
+
+#reviews {
+    width: 50%;
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'book_reviews/styles.css' %}" />
+    <title>Add Book and Review</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="container">
+            <a class="top_link" href="/books">Home</a>
+            <a href="/logout">Logout</a>
+            <h1>Add a New Book title and a Review:</h1>
+            <br>
+            {% if messages %}
+                {% for message in messages%}
+                    <h5 id="errMess">{{ message }}</h5>
+                {% endfor %}
+            {% endif %}
+            <br>
+            <br>
+            <form action="/new_review" method="post">
+                {% csrf_token %}
+                <p>Book Title: <input type="text" name="title"></p>
+                <p>Author:</p>
+                <p>Choose form the list: <select name="authors">
+                    {% for author in authors %}
+                    <option value="{{author.author}}">{{author.author}}</option>
+                    {% endfor %}
+                </select></p>
+                <p>Or add a new author: <input type="text" name="author"></p>
+                <p>Review:</p>
+                <textarea name="review"cols="30" rows="3"></textarea>
+                <p>Rating: <select name="rating">
+                    <option value="1">1</option>    
+                    <option value="2">2</option>    
+                    <option value="3">3</option>    
+                    <option value="4">4</option>    
+                    <option value="5">5</option>    
+                </select> </p>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>
